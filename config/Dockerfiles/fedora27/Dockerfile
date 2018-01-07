@@ -2,6 +2,7 @@ FROM fedora:27
 LABEL maintainer "https://github.com/CentOS-PaaS-SIG/linchpin"
 LABEL description "This container will verify linchpin works under Fedora27"
 
+ENV container docker
 ENV HOME=/root
 WORKDIR $HOME
 

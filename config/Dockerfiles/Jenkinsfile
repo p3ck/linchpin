@@ -77,6 +77,10 @@ podTemplate(name: podName,
                 ttyEnabled: true,
                 command: '/usr/sbin/init',
                 privileged: true,
+                envVars: [
+                   envVar(key: 'container',
+                          value: 'docker')
+                ],
                 workingDir: '/workDir'),
             containerTemplate(name: 'fedora27',
                 alwaysPullImage: true,
@@ -84,6 +88,10 @@ podTemplate(name: podName,
                 ttyEnabled: true,
                 command: '/usr/sbin/init',
                 privileged: true,
+                envVars: [
+                   envVar(key: 'container',
+                          value: 'docker')
+                ],
                 workingDir: '/workDir'),
             containerTemplate(name: 'fedora26',
                 alwaysPullImage: true,
@@ -91,6 +99,10 @@ podTemplate(name: podName,
                 ttyEnabled: true,
                 command: '/usr/sbin/init',
                 privileged: true,
+                envVars: [
+                   envVar(key: 'container',
+                          value: 'docker')
+                ],
                 workingDir: '/workDir')
         ],
         volumes: [
@@ -116,6 +128,7 @@ podTemplate(name: podName,
                 //
                 env.HOME = "/root"
                 env.DRIVERS = "dummy duffy libvirt"
+                env.container = "docker"
                 //
                 try {
                     // Prepare our environment
@@ -149,6 +162,19 @@ podTemplate(name: podName,
                         // create audit message file
                         //pipelineUtils.initializeAuditFile(msgAuditFile)
                     }
+                    currentStage = "fedora27-install"
+                    stage(currentStage) {
+                        dir('linchpin') {
+                            pipelineUtils.executeInContainer(currentStage, "fedora27", "/root/linchpin-install.sh")
+                        }
+                    }
+                    currentStage = "fedora27-test"
+                    stage(currentStage) {
+                        dir('linchpin') {
+                            env.target = "fedora27"
+                            pipelineUtils.executeInContainer(currentStage, "fedora27", "/root/linchpin-tests.sh")
+                        }
+                    }
                     currentStage = "centos7-install"
                     stage(currentStage) {
                         dir('linchpin') {
@@ -173,19 +199,6 @@ podTemplate(name: podName,
                         dir('linchpin') {
                             env.target = "fedora26"
                             pipelineUtils.executeInContainer(currentStage, "fedora26", "/root/linchpin-tests.sh")
-                        }
-                    }
-                    currentStage = "fedora27-install"
-                    stage(currentStage) {
-                        dir('linchpin') {
-                            pipelineUtils.executeInContainer(currentStage, "fedora27", "/root/linchpin-install.sh")
-                        }
-                    }
-                    currentStage = "fedora27-test"
-                    stage(currentStage) {
-                        dir('linchpin') {
-                            env.target = "fedora27"
-                            pipelineUtils.executeInContainer(currentStage, "fedora27", "/root/linchpin-tests.sh")
                         }
                     }
                 } catch (e) {
