@@ -23,7 +23,6 @@ MANIFEST
 # local inventory files containing user-specific environment data
 configure/inventory/local/
 
-*workspace*
 
 .coverage
 *coverage*
@@ -34,6 +33,5 @@ nosetests.xml
 .idea
 .pydevproject
 
-Dockerfiles/pip_install.sh
-Dockerfiles/lp_test_workspace
-Dockerfiles/duffy-ansible-module
+config/Dockerfiles/lp_test_workspace
+config/Dockerfiles/duffy-ansible-module
