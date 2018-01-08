@@ -1,4 +1,5 @@
 #!/bin/bash
+# Usually run from openshift in the container
 
 base_dir="$( pwd )"
 
