@@ -3,6 +3,7 @@ env.ghprbActualCommit = env.ghprbActualCommit ?: 'openshift'
 env.ghprbPullAuthorLogin = env.ghprbPullAuthorLogin ?: ''
 env.ghprbPullId = env.ghprbPullId ?: ''
 
+
 env.TARGET_BRANCH = env.TARGET_BRANCH ?: 'openshift'
 
 // Needed for podTemplate()
