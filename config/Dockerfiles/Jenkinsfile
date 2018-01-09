@@ -115,7 +115,7 @@ podTemplate(name: podName,
                 // See https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/KubernetesLauncher.java#L311
                 //
                 env.HOME = "/root"
-                env.DRIVERS = "dummy duffy libvirt"
+                env.DRIVERS = "dummy duffy"
                 //
                 try {
                     // Prepare our environment
