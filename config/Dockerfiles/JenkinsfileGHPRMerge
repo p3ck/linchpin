@@ -16,7 +16,7 @@ env.MSG_PROVIDER = 'fedora-fedmsg'
 // Defaults for SCM operations
 env.ghprbGhRepository = env.ghprbGhRepository ?: 'p3ck/linchpin'
 env.ghprbActualCommit = env.ghprbActualCommit ?: 'github_merge'
-env.ghprbPullId = env.ghprbPullId ?: '8'
+env.ghprbPullId = env.ghprbPullId ?: '9'
 
 def libraries = ['ci-pipeline'  : ['master', 'https://github.com/openshift/contra-lib.git']
                 ]
